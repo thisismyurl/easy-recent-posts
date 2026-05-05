@@ -1,21 +1,13 @@
 <?php
-
 /**
+ * Uninstall routine for Easy Recent Posts.
  *
- * Uninstall script
+ * This plugin stores no options in wp_options and creates no custom database
+ * tables, so there is nothing to clean up on uninstall.
  *
- * This file contains all the logic required to uninstall the plugin
- *
- *
- * @package 	Easy Recent Posts
- * @copyright	Copyright (c) 2008, Chrsitopher Ross
- * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License, v2 (or newer)
- *
- * @since 		Easy Recent Posts 15.01
- *
- *
+ * @package Easy_Recent_Posts
  */
 
-
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
+}
