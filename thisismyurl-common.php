@@ -5,7 +5,7 @@
  * @package   Easy_Recent_Posts
  * @copyright Copyright (c) 2008, Christopher Ross
  * @license   https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, v2 (or later)
- * @since     15.01
+ * @since     14.11
  */
 
 if ( ! defined( 'WPINC' ) ) {
@@ -22,6 +22,8 @@ if ( ! class_exists( 'Thisismyurl_Common_EREP' ) ) {
 
 		/**
 		 * Constructor — register all core hooks.
+		 *
+		 * @since 14.11
 		 */
 		public function __construct() {
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
@@ -33,17 +35,20 @@ if ( ! class_exists( 'Thisismyurl_Common_EREP' ) ) {
 
 		/**
 		 * Load plugin text domain.
+		 *
+		 * Since WP 4.6 the path argument is ignored; WP auto-discovers translations
+		 * from wp-content/languages/plugins/ and the Domain Path plugin header.
+		 *
+		 * @since 14.11
 		 */
 		public function load_textdomain() {
-			load_plugin_textdomain(
-				'easy-recent-posts',
-				false,
-				plugin_dir_path( __FILE__ ) . 'languages'
-			);
+			load_plugin_textdomain( 'easy-recent-posts' );
 		}
 
 		/**
 		 * Enqueue front-end stylesheet if present.
+		 *
+		 * @since 14.11
 		 */
 		public function enqueue_style() {
 			$css_file = plugin_dir_path( __FILE__ ) . 'css/easy-recent-posts.css';
@@ -58,14 +63,17 @@ if ( ! class_exists( 'Thisismyurl_Common_EREP' ) ) {
 		}
 
 		/**
-		 * Enqueue admin stylesheet on the plugin settings page.
+		 * Enqueue admin stylesheet on the plugin settings page only.
+		 *
+		 * @since 14.11
 		 */
 		public function admin_enqueue_scripts() {
-			if ( ! isset( $_GET['page'] ) || 'easy_recent_posts_settings' !== $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$screen = get_current_screen();
+			if ( ! $screen || 'settings_page_easy_recent_posts_settings' !== $screen->id ) {
 				return;
 			}
 			wp_enqueue_style(
-				'thisismyurl-common-erep',
+				'thisismyurl-common',
 				THISISMYURL_EREP_URL . 'css/thisismyurl-common.css',
 				array(),
 				THISISMYURL_EREP_VERSION
@@ -73,7 +81,9 @@ if ( ! class_exists( 'Thisismyurl_Common_EREP' ) ) {
 		}
 
 		/**
-		 * Register the options-page submenu (hidden from the menu — accessible via action link).
+		 * Register the options-page submenu (hidden — accessible via action link).
+		 *
+		 * @since 14.11
 		 */
 		public function admin_menu() {
 			add_options_page(
@@ -89,6 +99,7 @@ if ( ! class_exists( 'Thisismyurl_Common_EREP' ) ) {
 		/**
 		 * Add Settings link to the plugin row on Plugins > Installed Plugins.
 		 *
+		 * @since 14.11
 		 * @param string[] $links Existing action links.
 		 * @return string[]
 		 */
@@ -103,6 +114,8 @@ if ( ! class_exists( 'Thisismyurl_Common_EREP' ) ) {
 
 		/**
 		 * Render the settings/about page.
+		 *
+		 * @since 14.11
 		 */
 		public function settings_page() {
 			?>
@@ -112,11 +125,13 @@ if ( ! class_exists( 'Thisismyurl_Common_EREP' ) ) {
 				<h2><?php esc_html_e( 'General settings', 'easy-recent-posts' ); ?></h2>
 				<p>
 					<?php
-					printf(
-						/* translators: %s: URL to readme.txt */
-						esc_html__( 'The plugin has no settings. Once activated it works automatically. See the %sreadme.txt%s for full details.', 'easy-recent-posts' ),
-						'<a href="' . esc_url( THISISMYURL_EREP_URL . 'readme.txt' ) . '">',
-						'</a>'
+					echo wp_kses_post(
+						sprintf(
+							/* translators: 1: opening <a> tag linking to readme.txt, 2: closing </a> tag */
+							__( 'The plugin has no settings. Once activated it works automatically. See the %1$sreadme.txt%2$s for full details.', 'easy-recent-posts' ),
+							'<a href="' . esc_url( THISISMYURL_EREP_URL . 'readme.txt' ) . '">',
+							'</a>'
+						)
 					);
 					?>
 				</p>

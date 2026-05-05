@@ -20,7 +20,6 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'THISISMYURL_EREP_NAME',      'Easy Recent Posts' );
-define( 'THISISMYURL_EREP_SHORTNAME', 'Easy Recent Posts' );
 define( 'THISISMYURL_EREP_VERSION',   '26.05.0' );
 define( 'THISISMYURL_EREP_FILENAME',  plugin_basename( __FILE__ ) );
 define( 'THISISMYURL_EREP_FILEPATH',  plugin_dir_path( __FILE__ ) );
@@ -39,6 +38,8 @@ if ( ! class_exists( 'Thisismyurl_Easy_Recent_Posts' ) ) {
 
 		/**
 		 * Register hooks.
+		 *
+		 * @since 15.01
 		 */
 		public function run() {
 			add_action( 'widgets_init', array( $this, 'widget_init' ) );
@@ -46,22 +47,28 @@ if ( ! class_exists( 'Thisismyurl_Easy_Recent_Posts' ) ) {
 		}
 
 		/**
-		 * Shortcode handler.
+		 * Shortcode handler — must return, not echo, so WP places output inline.
+		 *
+		 * @since 15.01
+		 * @return string
 		 */
 		public function easy_recent_posts_shortcode() {
 			$recent_posts = $this->easy_recent_posts();
 			if ( ! empty( $recent_posts ) ) {
-				// Output is escaped per-element inside easy_recent_posts().
-				echo '<ul class="thisismyurl-easy-recent-posts">' . $recent_posts . '</ul>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				return '<ul class="thisismyurl-easy-recent-posts">' . $recent_posts . '</ul>';
 			}
+			return '';
 		}
 
 		/**
 		 * Retrieve and format recent posts.
 		 *
+		 * @since 15.01
 		 * @param array|null $options Override defaults. When $options['show'] === 0 (default)
 		 *                            returns the HTML string; when non-zero, echoes directly.
-		 * @return string|void
+		 *                            Note: 'before' and 'after' are developer-controlled values
+		 *                            (widget update() never persists them).
+		 * @return string
 		 */
 		public function easy_recent_posts( $options = null ) {
 			$options = wp_parse_args( $options, $this->recent_posts_defaults() );
@@ -97,7 +104,7 @@ if ( ! class_exists( 'Thisismyurl_Easy_Recent_Posts' ) ) {
 				if ( 1 === (int) $options['feature_image'] && has_post_thumbnail( $recent_post->ID ) ) {
 					$item = sprintf(
 						'<div class="thumbnail">%s</div>%s',
-						get_the_post_thumbnail( $recent_post->ID, 'thumbnail' ),
+						get_the_post_thumbnail( $recent_post->ID, 'thumbnail' ), // Escaped internally by WP core.
 						$item
 					);
 				}
@@ -117,34 +124,39 @@ if ( ! class_exists( 'Thisismyurl_Easy_Recent_Posts' ) ) {
 				$html = implode( '', $output );
 				if ( 0 !== (int) $options['show'] ) {
 					echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				} else {
-					return $html;
+					return '';
 				}
+				return $html;
 			}
+
+			return '';
 		}
 
 		/**
 		 * Return default options.
 		 *
+		 * @since 15.01
 		 * @return array
 		 */
 		public function recent_posts_defaults() {
 			return array(
-				'title'          => __( 'Easy Recent Posts', 'easy-recent-posts' ),
-				'post_count'     => 10,
-				'include_link'   => 1,
-				'before'         => '<li>',
-				'after'          => '</li>',
-				'nofollow'       => 0,
-				'show_excerpt'   => 0,
-				'feature_image'  => 0,
-				'show_credit'    => 1,
-				'show'           => 0,
+				'title'         => __( 'Easy Recent Posts', 'easy-recent-posts' ),
+				'post_count'    => 10,
+				'include_link'  => 1,
+				'before'        => '<li>',
+				'after'         => '</li>',
+				'nofollow'      => 0,
+				'show_excerpt'  => 0,
+				'feature_image' => 0,
+				'show_credit'   => 1,
+				'show'          => 0,
 			);
 		}
 
 		/**
 		 * Register the widget.
+		 *
+		 * @since 15.01
 		 */
 		public function widget_init() {
 			require_once plugin_dir_path( __FILE__ ) . 'widgets/class-thisismyurl-easy-recent-posts-widget.php';
@@ -161,6 +173,7 @@ if ( ! function_exists( 'thisismyurl_easy_recent_posts' ) ) {
 	/**
 	 * Template tag for theme files.
 	 *
+	 * @since 15.01
 	 * @param array|null $options See Thisismyurl_Easy_Recent_Posts::recent_posts_defaults().
 	 */
 	function thisismyurl_easy_recent_posts( $options = null ) {
