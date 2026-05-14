@@ -30,6 +30,7 @@ Features:
 == Changelog ==
 
 = 26.05.0 =
+* Removed legacy `thisismyurl-common.php` inheritance; shared hooks are now inlined in the main plugin class.
 * Fixed class-name typo `thissimyurl` → `Thisismyurl_Easy_Recent_Posts` throughout.
 * Renamed widget file to match WordPress naming conventions.
 * Fixed `wp_parse_args` argument order in `easy_recent_posts()`.

@@ -30,6 +30,10 @@ Display your most recent posts with a widget or shortcode. Supports featured ima
 [thisismyurl_easy_recent_posts]
 ```
 
+## Architecture
+
+The plugin now registers lifecycle hooks directly in its main class and no longer relies on the legacy `thisismyurl-common.php` inheritance layer.
+
 ## Template Tag
 
 ```php
