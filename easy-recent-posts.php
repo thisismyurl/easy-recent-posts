@@ -5,7 +5,7 @@
  * Description: An easy-to-use WordPress widget and shortcode to add recent posts to any theme.
  * Author:      Christopher Ross
  * Author URI:  https://thisismyurl.com/
- * Version:     26.05.0
+ * Version:     26.05.1
  * License:     GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: easy-recent-posts
@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'THISISMYURL_EREP_NAME',      'Easy Recent Posts' );
-define( 'THISISMYURL_EREP_VERSION',   '26.05.0' );
+define( 'THISISMYURL_EREP_VERSION',   '26.05.1' );
 define( 'THISISMYURL_EREP_FILENAME',  plugin_basename( __FILE__ ) );
 define( 'THISISMYURL_EREP_FILEPATH',  plugin_dir_path( __FILE__ ) );
 define( 'THISISMYURL_EREP_URL',       plugin_dir_url( __FILE__ ) );
