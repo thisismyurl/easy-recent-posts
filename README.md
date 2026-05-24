@@ -1,4 +1,4 @@
-# Easy Recent Posts
+# This Is My URL - Easy Recent Posts
 
 Display your most recent posts with a widget or shortcode. Supports featured images, excerpts, and `rel="nofollow"`. No external services required.
 

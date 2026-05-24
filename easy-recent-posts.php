@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Easy Recent Posts
+ * Plugin Name: This Is My URL - Easy Recent Posts
  * Plugin URI:  https://thisismyurl.com/downloads/easy-recent-posts/
  * Description: An easy-to-use WordPress widget and shortcode to add recent posts to any theme.
  * Author:      Christopher Ross
@@ -119,6 +119,11 @@ if ( ! class_exists( 'Thisismyurl_Easy_Recent_Posts' ) ) {
 				'<a href="%s">%s</a>',
 				esc_url( admin_url( 'options-general.php?page=easy_recent_posts_settings' ) ),
 				esc_html__( 'Settings', 'easy-recent-posts' )
+			);
+			$links[] = sprintf(
+				'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+				esc_url( 'https://github.com/sponsors/thisismyurl' ),
+				esc_html__( 'Sponsor', 'easy-recent-posts' )
 			);
 			return $links;
 		}

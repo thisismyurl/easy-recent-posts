@@ -1,4 +1,4 @@
-=== Easy Recent Posts ===
+=== This Is My URL - Easy Recent Posts ===
 Contributors: christopherross
 Donate link: https://github.com/sponsors/thisismyurl
 Tags: recent posts, recent, sidebar, widget
