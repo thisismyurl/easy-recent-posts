@@ -5,7 +5,7 @@ Tags: recent posts, recent, sidebar, widget
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 26.05.1
+Stable tag: 26.6147
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,11 @@ Features:
 3. Add the **Easy Recent Posts** widget to a sidebar or use the shortcode `[thisismyurl_easy_recent_posts]`.
 
 == Changelog ==
+
+= 26.6147 =
+* Unified plugin versioning to the x.Yddd calendar-version scheme.
+* Confirmed compatibility with WordPress 7.0.
+
 
 = 26.05.1 =
 * Standardized the donation link to GitHub Sponsors.
