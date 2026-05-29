@@ -159,10 +159,11 @@ class Thisismyurl_Easy_Recent_Posts_Widget extends WP_Widget {
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
 
 		if ( 1 === (int) $instance['show_credit'] && $title ) {
+			// No title attribute: it would duplicate the visible link text and cause
+			// doubled screen-reader announcements (WCAG 2.4.4 / 4.1.2).
 			$title = sprintf(
-				'<a href="%s" title="%s">%s</a>',
+				'<a href="%s">%s</a>',
 				esc_url( 'https://thisismyurl.com/downloads/easy-recent-posts/' ),
-				esc_attr__( 'Easy Recent Posts', 'easy-recent-posts' ),
 				esc_html( $title )
 			);
 		} elseif ( $title ) {

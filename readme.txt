@@ -5,7 +5,7 @@ Tags: recent posts, recent, sidebar, widget
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 26.6147
+Stable tag: 26.6148.2110
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,10 @@ Features:
 3. Add the **Easy Recent Posts** widget to a sidebar or use the shortcode `[thisismyurl_easy_recent_posts]`.
 
 == Changelog ==
+
+= 26.6148 =
+* Accessibility: removed redundant `title` attributes from recent-post links and the widget credit link; they duplicated the visible link text and caused doubled screen-reader announcements (WCAG 2.4.4 / 4.1.2).
+* Documented that featured-image alt text is controlled by the attachment's Alternative Text field.
 
 = 26.6147 =
 * Unified plugin versioning to the x.Yddd calendar-version scheme.
