@@ -30,6 +30,10 @@ Features:
 
 == Changelog ==
 
+= 26.6148 =
+* Accessibility: removed redundant `title` attributes from recent-post links and the widget credit link; they duplicated the visible link text and caused doubled screen-reader announcements (WCAG 2.4.4 / 4.1.2).
+* Documented that featured-image alt text is controlled by the attachment's Alternative Text field.
+
 = 26.6147 =
 * Unified plugin versioning to the x.Yddd calendar-version scheme.
 * Confirmed compatibility with WordPress 7.0.

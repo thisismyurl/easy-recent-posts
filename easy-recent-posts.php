@@ -223,16 +223,20 @@ if ( ! class_exists( 'Thisismyurl_Easy_Recent_Posts' ) ) {
 
 				if ( 1 === (int) $options['include_link'] ) {
 					$rel  = ( 1 === (int) $options['nofollow'] ) ? ' rel="nofollow noopener noreferrer"' : '';
+					// No title attribute: it would duplicate the visible link text and cause
+					// doubled screen-reader announcements (WCAG 2.4.4 / 4.1.2).
 					$item = sprintf(
-						'<span class="title-link"><a href="%s" title="%s"%s>%s</a></span>',
+						'<span class="title-link"><a href="%s"%s>%s</a></span>',
 						esc_url( get_permalink( $recent_post->ID ) ),
-						esc_attr( get_the_title( $recent_post->ID ) ),
 						$rel,
 						$item
 					);
 				}
 
 				if ( 1 === (int) $options['feature_image'] && has_post_thumbnail( $recent_post->ID ) ) {
+					// Alt text is controlled by the attachment's own alt-text field
+					// (Media Library > Alternative Text); WP core emits it here. A post
+					// with a decorative thumbnail should set an empty alt on the attachment.
 					$item = sprintf(
 						'<div class="thumbnail">%s</div>%s',
 						get_the_post_thumbnail( $recent_post->ID, 'thumbnail' ), // Escaped internally by WP core.
