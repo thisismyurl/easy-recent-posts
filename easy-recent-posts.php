@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: This Is My URL - Easy Recent Posts
+ * Plugin Name: Easy Recent Posts by Christopher Ross
  * Plugin URI:  https://thisismyurl.com/downloads/easy-recent-posts/
  * Description: An easy-to-use WordPress widget and shortcode to add recent posts to any theme.
  * Author:      Christopher Ross
